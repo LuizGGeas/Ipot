@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:ipot_integrador/header.dart';
+import 'package:ipot_integrador/pages/lista_plantas.dart';
+import 'package:ipot_integrador/shared/pages/drawer.dart';
+import 'package:ipot_integrador/shared/pages/header.dart';
 
 void main() {
   runApp(MyApp());
@@ -31,16 +33,8 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: Header(),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              'You have pushed the button this many times:',
-            ),
-          ],
-        ),
-      ),
+      drawer: DrawerComponent(),
+      body: ListaPlantas(),
     );
   }
 }

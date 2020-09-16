@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "854097080079",
+    "firebase_url": "https://ipot-98a6c.firebaseio.com",
+    "project_id": "ipot-98a6c",
+    "storage_bucket": "ipot-98a6c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:854097080079:android:7f3d0931f7d6cbc7dc187a",
+        "android_client_info": {
+          "package_name": "com.example.ipot_integrador"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "854097080079-qklost8lbrk9kuh5f10gpag6ta7eog4u.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDE3yXPXaQeIxKQinsKUrmB4FeeSf3drYQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "854097080079-qklost8lbrk9kuh5f10gpag6ta7eog4u.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
