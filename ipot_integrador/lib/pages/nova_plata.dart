@@ -13,6 +13,13 @@ class _NovaPlantaState extends State<NovaPlanta> {
   var planta = Planta();
 
   @override
+  void initState() {
+    super.initState();
+    planta.quantiaAgua = null;
+    planta.quantiaSol = null;
+  }
+
+  @override
   Widget build(BuildContext context) {
     return new Scaffold(
       appBar: Header(),
@@ -20,56 +27,103 @@ class _NovaPlantaState extends State<NovaPlanta> {
         child: Column(
           children: [
             TextFormField(
-              decoration: InputDecoration(hintText: 'Nome da planta'),
+              decoration: InputDecoration(
+                hintText: 'Nome da planta',
+                filled: true,
+                enabledBorder: OutlineInputBorder(
+                  borderSide:
+                      BorderSide(color: Colors.greenAccent[400], width: 2.0),
+                ),
+              ),
               onChanged: (value) => planta.nome = value,
             ),
             TextFormField(
-              decoration: InputDecoration(hintText: 'Nome Científico'),
+              decoration: InputDecoration(
+                hintText: 'Nome Científico',
+                filled: true,
+                enabledBorder: OutlineInputBorder(
+                  borderSide:
+                      BorderSide(color: Colors.greenAccent[400], width: 2.0),
+                ),
+              ),
               onChanged: (value) => planta.nome = value,
             ),
             TextFormField(
-              decoration: InputDecoration(hintText: 'Temperatura Ideal'),
+              decoration: InputDecoration(
+                hintText: 'Temperatura Ideal',
+                filled: true,
+                enabledBorder: OutlineInputBorder(
+                  borderSide:
+                      BorderSide(color: Colors.greenAccent[400], width: 2.0),
+                ),
+              ),
               onChanged: (value) => planta.temperatura = int.parse(value),
               keyboardType: TextInputType.number,
               inputFormatters: <TextInputFormatter>[
                 WhitelistingTextInputFormatter.digitsOnly
               ],
             ),
-            Row(
-              children: getListSunMeasure(planta),
-            ),
-            Row(
-              children: getListWaterMeasure(planta),
-            )
+            getRadioTileListOfMeasure(
+                getListWaterMeasure(), planta.quantiaAgua),
+            getRadioTileListOfMeasure(getListSunMeasure(), planta.quantiaSol)
           ],
         ),
       ),
     );
   }
 
-  List<Radio> getListWaterMeasure(Planta planta) {
-    List<Radio> radioList;
-    QuantiaAgua.values.forEach((element) {
-      radioList.add(
-        Radio(
-            value: element,
-            groupValue: planta.quantiaSol,
-            onChanged: (value) => planta.quantiaSol = value),
+  Widget getRadioTileListOfMeasure<T>(
+      List<dynamic> measureList, String groupValue) {
+    List<Widget> list = [];
+    for (dynamic element in measureList) {
+      list.add(
+        new Flexible(child: getListTile(element, groupValue)),
       );
-    });
-    return radioList;
+    }
+
+    return new Row(
+      children: list,
+    );
   }
 
-  List<Radio> getListSunMeasure(Planta planta) {
-    List<Radio> radioList;
-    QuantiaSol.values.forEach((element) {
-      radioList.add(
-        Radio(
-            value: element,
-            groupValue: planta.quantiaSol,
-            onChanged: (value) => planta.quantiaSol = value),
-      );
+  Widget getListTile(element, groupValue) {
+    return new RadioListTile(
+      value: element,
+      title: Text(element),
+      groupValue: groupValue,
+      onChanged: (value) {
+        setStateWaterMeasureValue(value, groupValue);
+
+        groupValue = value;
+
+        print(groupValue + " / " + value);
+      },
+      selected: groupValue == element,
+      activeColor: Colors.green,
+    );
+  }
+
+  List<dynamic> getListWaterMeasure() {
+    return QuantiaAgua.values.map((value) => getPropertyName(value)).toList();
+  }
+
+  List<dynamic> getListSunMeasure() {
+    return QuantiaSol.values.map((value) => getPropertyName(value)).toList();
+  }
+
+  getWaterEnumOfString(String enumName) {
+    return QuantiaAgua.values;
+  }
+
+  String getPropertyName(Object enumerator) {
+    return enumerator.toString().split(".").last;
+  }
+
+  setStateWaterMeasureValue<T>(value, groupValue) {
+    print("$value foi selecionado");
+
+    setState(() {
+      groupValue = value;
     });
-    return radioList;
   }
 }

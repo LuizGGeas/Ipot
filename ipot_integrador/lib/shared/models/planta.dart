@@ -1,10 +1,8 @@
-import 'PreferenciasPlantaEnum.dart';
-
 class Planta {
   String nome;
   String nomeCientifico;
-  QuantiaAgua quantiaAgua;
-  QuantiaSol quantiaSol;
+  String quantiaAgua;
+  String quantiaSol;
   int temperatura;
   Map<String, dynamic> toJson() {
     return {
